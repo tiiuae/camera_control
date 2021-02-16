@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<robot name="camera_and_map">
+
+    <link name="map">
+    </link>
+
+    <link name="base_link" >
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <geometry>
+                <cylinder length="0.1" radius="0.2"/>
+            </geometry>
+        </visual>
+    </link>
+
+    <joint name="map_to_base" type="continuous">
+        <origin xyz="1 1 0" rpy="0 0 0"/>
+        <parent link="map"/>
+        <child link="base_link"/>
+    </joint>
+
+    <link name="camera_frame" />
+
+    <joint name="base_to_camera" type="fixed">
+        <origin xyz="0.1 0 0.1" rpy="0 0 1.57"/>
+        <parent link="base_link"/>
+        <child link="camera_frame"/>
+    </joint>
+
+</robot>

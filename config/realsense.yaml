@@ -3,19 +3,22 @@
 #--------------------------------------------------------------------------------------------
 # Camera Parameters. Adjust them!
 #--------------------------------------------------------------------------------------------
+Camera.type: "PinHole"
+
+
 
 # Camera calibration and distortion parameters (OpenCV) 
-Camera.fx: 611.47207
+Camera.fx: 612.03543
 Camera.fy: 610.02283
-Camera.cx: 325.11555
-Camera.cy: 244.53931
+Camera.cx: 610.97315
+Camera.cy: 246.20816
 
-#  dist = [5.390453e-02 4.568545e-01 -1.853402e-03 1.866642e-03 -2.109520e+00 0.000000e+00 0.000000e+00 0.000000e+00]
-Camera.k1: 5.390453e-02
-Camera.k2: 4.568545e-01
-Camera.p1: 0
-Camera.p2: 0
-Camera.k3: 0
+#dist = [1.121845e-01 -7.868369e-02 -1.448641e-03 9.089142e-04 -5.220198e-01 0.000000e+00 0.000000e+00 0.000000e+00]
+Camera.k1: 0.1121845
+Camera.k2: -0.07868369
+Camera.p1: -0.001448641
+Camera.p2: 0.0009089142
+Camera.k3: -0.5220198
 
 # Camera frames per second 
 Camera.fps: 6.0
@@ -24,12 +27,16 @@ Camera.fps: 6.0
 Camera.RGB: 1
 
 
+# Camera resolution
+Camera.width: 640
+Camera.height: 480
+
 #--------------------------------------------------------------------------------------------
 # ORB Parameters
 #--------------------------------------------------------------------------------------------
 
 # ORB Extractor: Number of features per image
-ORBextractor.nFeatures: 20
+ORBextractor.nFeatures: 1000
 
 # ORB Extractor: Scale factor between levels in the scale pyramid 	
 ORBextractor.scaleFactor: 1.2
