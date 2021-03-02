@@ -25,8 +25,6 @@ def to_urdf(xacro_path, parameters=None):
 
 def generate_launch_description():
 
-    #xacro_path = os.path.join(get_package_share_directory('camera_control'),  'camera.urdf.xacro')
-    #urdf = to_urdf(xacro_path, {'use_nominal_extrinsics' : 'true', 'add_plug' : 'true'})
     urdf = os.path.join(os.path.join(get_package_share_directory('camera_control'), 'urdf'), 'camera.urdf')
     rviz_config_dir = os.path.join(get_package_share_directory('camera_control'), 'config')
 

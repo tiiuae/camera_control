@@ -6,19 +6,30 @@
 Camera.type: "PinHole"
 
 
+# Camera calibration and distortion parameters (OpenCV)
+Camera.fx: 606.4136962890625
+Camera.fy: 606.1298217773438
+Camera.cx: 324.28887939453125
+Camera.cy: 245.64207458496094
 
-# Camera calibration and distortion parameters (OpenCV) 
-Camera.fx: 612.03543
-Camera.fy: 610.02283
-Camera.cx: 610.97315
-Camera.cy: 246.20816
+Camera.k1: 0.14834414422512054
+Camera.k2: -0.49997735023498535
+Camera.p1: -0.0012163241626694798
+Camera.p2: 0.00006741442484781146
+Camera.k3: 0.43003612756729126
 
-#dist = [1.121845e-01 -7.868369e-02 -1.448641e-03 9.089142e-04 -5.220198e-01 0.000000e+00 0.000000e+00 0.000000e+00]
-Camera.k1: 0.1121845
-Camera.k2: -0.07868369
-Camera.p1: -0.001448641
-Camera.p2: 0.0009089142
-Camera.k3: -0.5220198
+## Camera calibration and distortion parameters (OpenCV)
+#Camera.fx: 612.03543
+#Camera.fy: 610.02283
+#Camera.cx: 610.97315
+#Camera.cy: 246.20816
+#
+##dist = [1.121845e-01 -7.868369e-02 -1.448641e-03 9.089142e-04 -5.220198e-01 0.000000e+00 0.000000e+00 0.000000e+00]
+#Camera.k1: 0.1121845
+#Camera.k2: -0.07868369
+#Camera.p1: -0.001448641
+#Camera.p2: 0.0009089142
+#Camera.k3: -0.5220198
 
 # Camera frames per second 
 Camera.fps: 6.0

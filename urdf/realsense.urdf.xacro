@@ -1,10 +1,11 @@
 <?xml version="1.0"?>
 <robot name="realsense2_camera" xmlns:xacro="http://ros.org/wiki/xacro">
-  <xacro:arg name="use_nominal_extrinsics" default="false"/>
+  <xacro:arg name="use_nominal_extrinsics" default="true"/>
   <xacro:arg name="name" default="camera"/>
   <xacro:include filename="$(find realsense2_description)/urdf/_l515.urdf.xacro" />
 
   <link name="map">
+    <origin xyz="0 0 0" rpy="0 0 0"/>
   </link>
 
   <link name="base_link" >

@@ -5,6 +5,9 @@ from launch import LaunchDescription
 from launch_ros.actions import Node
 from launch.actions import DeclareLaunchArgument
 from launch.substitutions import LaunchConfiguration, PythonExpression
+# from launch.actions import IncludeLaunchDescription
+# from launch.launch_description_sources import PythonLaunchDescriptionSource
+# from launch.substitutions import ThisLaunchFileDir
 import xacro
 import tempfile
 
@@ -24,11 +27,10 @@ def to_urdf(xacro_path, parameters=None):
 
     return urdf_path
 
-
 def generate_launch_description():
     camera_config_file = os.path.join(
         get_package_share_directory('camera_control'),
-        'realsense.yaml')
+        'realsense_imu.yaml')
 
     vocabulary_file = os.path.join(
         get_package_share_directory('orbslam_node'),
@@ -37,7 +39,7 @@ def generate_launch_description():
 
     rviz_config_dir = os.path.join(get_package_share_directory('camera_control'), 'config')
     xacro_path = os.path.join(get_package_share_directory('camera_control'), 'urdf', 'realsense.urdf.xacro')
-    urdf_string = to_urdf(xacro_path, {'use_nominal_extrinsics': 'true', 'add_plug': 'true', 'name': 'camera'})
+    urdf = to_urdf(xacro_path, {'use_nominal_extrinsics': 'true', 'add_plug': 'true', 'name': 'camera'})
 
     return LaunchDescription(
         [
@@ -49,8 +51,8 @@ def generate_launch_description():
                 parameters=[{'serial_no' : 'f0210811',
                              'unite_imu_method' : 'linear_interpolation',
                              'enable_color': True,
-                             'enable_gyro' : False,
-                             'enable_accel' : False,
+                             'enable_gyro' : True,
+                             'enable_accel' : True,
                              'enable_infra' : False,
                              'enable_infra1' : False,
                              'enable_infra2' : False,
@@ -60,6 +62,8 @@ def generate_launch_description():
                              'color_width' : 640,
                              'color_height' : 480,
                              'color_fps' : 6.0,
+                             'gyro_fps' : 100.0,
+                             'accel_fps' : 100.0,
                              }],
                 output='screen',
             ),
@@ -69,8 +73,9 @@ def generate_launch_description():
                 name='rviz2',
                 output='screen',
                 arguments=['-d', rviz_config_dir],
-                remappings=[('/camera/image', '/camera/color/image_raw')],
-                #parameters=[{'use_sim_time': False}]
+                remappings=[('/camera/image', '/camera/color/image_raw'),
+                            ('/imu', '/camera/imu')],
+                parameters=[{'use_sim_time': False}]
             ),
             Node(
                 name='model_node',
@@ -78,15 +83,16 @@ def generate_launch_description():
                 executable='robot_state_publisher',
                 namespace='',
                 output='screen',
-                arguments=[urdf_string]
+                arguments=[urdf]
             ),
 
             # Node(
             #     package='orbslam_node',
-            #     executable='ros_mono',
+            #     executable='ros_mono_inertial',
             #     name='orb_slam',
             #     output='screen',
-            #     remappings=[('/camera/image', '/camera/color/image_raw')],
+            #     remappings=[('/camera/image', '/camera/color/image_raw'),
+            #                 ('/imu', '/camera/imu')],
             #     arguments=[vocabulary_file,
             #                camera_config_file],
             # ),
