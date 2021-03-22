@@ -26,17 +26,9 @@ def to_urdf(xacro_path, parameters=None):
 
 
 def generate_launch_description():
-    camera_config_file = os.path.join(
-        get_package_share_directory('camera_control'),
-        'realsense.yaml')
-
-    vocabulary_file = os.path.join(
-        get_package_share_directory('orbslam_node'),
-        'Vocabulary',
-        'ORBvoc.txt')
 
     rviz_config_dir = os.path.join(get_package_share_directory('camera_control'), 'config')
-    xacro_path = os.path.join(get_package_share_directory('camera_control'), 'urdf', 'realsense.urdf.xacro')
+    xacro_path = os.path.join(get_package_share_directory('camera_control'), 'urdf', 'realsense_depth_test.urdf')
     urdf_string = to_urdf(xacro_path, {'use_nominal_extrinsics': 'true', 'add_plug': 'true', 'name': 'camera'})
 
     return LaunchDescription(
@@ -49,14 +41,12 @@ def generate_launch_description():
                 parameters=[{'serial_no' : 'f0210811',
                              'unite_imu_method' : 'linear_interpolation',
                              'enable_color': True,
-                             'color_width' : 640,
-                             'color_height' : 480,
-                             'color_fps' : 6.0,
                              'enable_gyro' : False,
                              'enable_accel' : False,
                              'enable_infra' : False,
                              'enable_infra1' : False,
                              'enable_infra2' : False,
+                             'enable_confidence' : False,
                              'enable_depth' : True,
                              'enable_pointcloud' : True,
                              'depth_fps': 6.0,

@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<robot name="depth_camera_odom_and_map">
+
+
+    <link name="map">
+        <!--
+            Global coordinate system, connected to the SLAM Map
+            (Later on will be connected to Earth/GPS/Whatever)
+            SLAM is used to prevent drifting, but it's still jumpy/non-continuous
+        -->
+    </link>
+
+    <link name="odom">
+        <!--
+            Coordinate System connected to original pose at what robot started
+            This one is drifty, but smooth and continuous.
+            It also supposed to be almost real-time
+        -->
+    </link>
+
+
+    <joint name="map_to_odom" type="continuous">
+        <!--
+            For now we initialize `map` in the same point as `odom`, but odom will occasionally drift
+
+            Exactly this joint (transform) need to be published by SLAM
+        -->
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <parent link="map"/>
+        <child link="odom"/>
+    </joint>
+
+    <link name="base_link" >
+        <visual>
+            <geometry>
+                <cylinder length="0.1" radius="0.2"/>
+            </geometry>
+        </visual>
+    </link>
+
+    <joint name="odom_to_base" type="continuous">
+        <!--
+            This transform should be published by Odometry
+        -->
+
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <parent link="odom"/>
+        <child link="base_link"/>
+    </joint>
+
+
+    <link name="camera_link" />
+
+    <joint name="base_to_camera" type="fixed">
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <parent link="base_link"/>
+        <child link="camera_link"/>
+    </joint>
+
+
+</robot>
