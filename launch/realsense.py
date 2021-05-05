@@ -49,37 +49,8 @@ def generate_launch_description():
                              'enable_confidence' : True,
                              'enable_depth' : True,
                              'enable_pointcloud' : True,
-                             #'depth_fps': 6.0,
                              'infra_rgb' : False,
                              }],
                 output='screen',
             ),
-            Node(
-                package='rviz2',
-                executable='rviz2',
-                name='rviz2',
-                output='screen',
-                arguments=['-d', rviz_config_dir],
-                remappings=[('/camera/image', '/camera/color/image_raw')],
-                #parameters=[{'use_sim_time': False}]
-            ),
-            Node(
-                name='model_node',
-                package='robot_state_publisher',
-                executable='robot_state_publisher',
-                namespace='',
-                output='screen',
-                arguments=[urdf_string]
-            ),
-
-            # Node(
-            #     package='orbslam_node',
-            #     executable='ros_mono',
-            #     name='orb_slam',
-            #     output='screen',
-            #     remappings=[('/camera/image', '/camera/color/image_raw')],
-            #     arguments=[vocabulary_file,
-            #                camera_config_file],
-            # ),
-
         ])
