@@ -7,8 +7,6 @@
   <maintainer email="sergey.smirnov@unikie.com">sergey</maintainer>
   <license>TODO: License declaration</license>
 
-  <!--<depend>lidar_slam</depend>-->
-
 
   <exec_depend>rclpy</exec_depend>
   <exec_depend>std_msgs</exec_depend>
