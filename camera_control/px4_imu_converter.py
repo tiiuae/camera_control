@@ -8,8 +8,8 @@ class PX4ImuConverter(Node):
 
     def __init__(self):
         super().__init__('px4_imu_converter')
-        self.subscription = self.create_subscription(SensorCombined, 'SensorCombined_PubSubTopic', self.imu_callback, 10)
-        # self.subscription_timesync = self.create_subscription(Timesync, 'Timesync_PubSubTopic', self.timesync_callback, 10)
+        self.subscription = self.create_subscription(SensorCombined, 'fmu/sensor_combined/out', self.imu_callback, 10)
+        # self.subscription_timesync = self.create_subscription(Timesync, 'fmu/timesync/out', self.timesync_callback, 10)
         self.publisher = self.create_publisher(Imu, 'imu', 10)
         self.frame_id = 'imu'
         #self.time_offset = 0
